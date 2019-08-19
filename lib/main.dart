@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(MaterialApp(
@@ -9,6 +10,21 @@ void main() {
 }
 
 class Home extends StatefulWidget {
+
+  var _frases =
+  ["A vida é uma peça de teatro que não permite ensaios. Por isso, cante, chore, dance, ria e viva intensamente, antes que a cortina se feche e a peça termine sem aplausos.",
+    "Renda-se, como eu me rendi. Mergulhe no que você não conhece como eu mergulhei. Não se preocupe em entender, viver ultrapassa qualquer entendimento.",
+    "Apressa-te a viver bem e pensa que cada dia é, por si só, uma vida.",
+    "Aprenda como se você fosse viver para sempre. Viva como se você fosse morrer amanhã."];
+
+  var _fraseGerada = "Clique abaixo para gerar a frase";
+
+  void _gerarFrase (BuildContext context) {
+    var numSorteado = Random().nextInt( _frases.length );
+
+    _fraseGerada = _frases[numSorteado].toString();
+  }
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -32,7 +48,10 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               Image.asset("images/logo.png"),
               Text(
-                "clique abaixo para gerar uma frase",
+
+
+                widget._fraseGerada,
+
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                     fontStyle: FontStyle.italic,
@@ -48,7 +67,18 @@ class _HomeState extends State<Home> {
                       fontWeight: FontWeight.bold),
                 ),
                 color: Colors.green,
-                onPressed: () {},
+                onPressed: () {
+
+                  setState(() {
+                    widget._gerarFrase(context);
+
+
+                  });
+
+
+                }
+
+
               )
             ],
           ),
